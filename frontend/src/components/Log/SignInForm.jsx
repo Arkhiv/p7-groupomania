@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const SignInForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = e => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    const emailError = document.querySelector('.email.error');
-    const passwordError = document.querySelector('.password.error');
-    console.log(process.env.REACT_APP_API_URL);
+    const emailError = document.querySelector(".email.error");
+    const passwordError = document.querySelector(".password.error");
 
     axios({
-      method: 'post',
+      method: "post",
       url: `${process.env.REACT_APP_API_URL}api/user/login`,
       withCredentials: true,
       data: {
@@ -20,15 +19,15 @@ const SignInForm = () => {
         password,
       },
     })
-      .then(res => {
+      .then((res) => {
         if (res.data.errors) {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
         } else {
-          window.location = '/';
+          window.location = "/";
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -41,7 +40,7 @@ const SignInForm = () => {
         type="text"
         name="email"
         id="email"
-        onChange={e => setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
         value={email}
       />
       <div className="email error"></div>
@@ -52,7 +51,7 @@ const SignInForm = () => {
         type="password"
         name="password"
         id="password"
-        onChange={e => setPassword(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
       <div className="password error"></div>

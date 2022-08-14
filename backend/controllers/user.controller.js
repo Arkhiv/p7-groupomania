@@ -1,3 +1,5 @@
+/* eslint-disable import/order */
+/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 /* eslint-disable no-underscore-dangle */
 const db = require('../models');
@@ -16,6 +18,7 @@ exports.signup = (req, res) => {
       const userSignUp = User.build({
         email: req.body.email,
         password: hash,
+        pseudo: req.body.pseudo,
       });
       userSignUp.save();
       res.status(201).json({ message: 'Utilisateur créé !' });

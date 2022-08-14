@@ -1,28 +1,31 @@
-const db = require("../models");
-const Comment = db.comment;
-const { Op } = require("sequelize");
-const fs = require("fs");
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/order */
+const db = require('../models');
 
-exports.readComment = (req, res, next) => {
+const Comment = db.comment;
+const { Op } = require('sequelize');
+const fs = require('fs');
+
+exports.readComment = (req, res) => {
   Comment.findOne({ where: { id: req.params.id } })
-    .then((comment) => {
+    .then(comment => {
       res.status(200).json(comment);
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(404).json({
-        error: error,
+        error,
       });
     });
 };
 
-exports.readAllComments = (req, res, next) => {
+exports.readAllComments = (req, res) => {
   Comment.findAll()
-    .then((comments) => {
+    .then(comments => {
       res.status(200).json(comments);
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(400).json({
-        error: error,
+        error,
       });
     });
 };
@@ -35,11 +38,11 @@ exports.createComment = (req, res) => {
   });
   newComment
     .save()
-    .then(() => res.status(201).json({ message: "Commentaire créé !" }))
-    .catch((error) => res.status(400).json({ error }));
+    .then(() => res.status(201).json({ message: 'Commentaire créé !' }))
+    .catch(error => res.status(400).json({ error }));
 };
 
-exports.updateComment = (req, res, next) => {
+exports.updateComment = (req, res) => {
   Comment.update(
     {
       text: req.body.text,
@@ -48,23 +51,23 @@ exports.updateComment = (req, res, next) => {
   )
     .then(() => {
       res.status(201).json({
-        message: "Votre Commentaire a bien été modifié !",
+        message: 'Votre Commentaire a bien été modifié !',
       });
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(400).json({
-        error: error,
+        error,
       });
     });
 };
 
-exports.deleteComment = (req, res, next) => {
+exports.deleteComment = (req, res) => {
   const userId = req.params.id;
   Comment.destroy({ where: { id: userId } })
-    .then((num) => {
+    .then(num => {
       if (num === 1) {
         res.send({
-          message: "Commentaire supprimé!",
+          message: 'Commentaire supprimé!',
         });
       } else {
         res.send({
@@ -72,7 +75,7 @@ exports.deleteComment = (req, res, next) => {
         });
       }
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(500).send({
         message: `Could not delete Comment with id=${userId}`,
       });

@@ -4,6 +4,7 @@ const router = express.Router();
 const multer = require('multer');
 const auth = require('../middleware/auth');
 const userCtrl = require('../controllers/user.controller');
+// const authController = require('../controllers/auth.controller');
 const uploadMiddleware = require('../middleware/multer');
 
 const upload = multer();
@@ -11,6 +12,7 @@ const upload = multer();
 // Auth
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
+// router.get('/logout', userCtrl.logout);
 
 // User CRUD
 

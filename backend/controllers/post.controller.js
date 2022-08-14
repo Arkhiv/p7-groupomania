@@ -1,51 +1,54 @@
-const db = require("../models");
-const Post = db.post;
-const { Op } = require("sequelize");
-const fs = require("fs");
-const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
-const { uploadErrors } = require("../utils/errors.utils");
+/* eslint-disable import/order */
+/* eslint-disable no-unused-vars */
+const db = require('../models');
 
-exports.readPost = (req, res, next) => {
+const Post = db.post;
+const { Op } = require('sequelize');
+const fs = require('fs');
+const { promisify } = require('util');
+const pipeline = promisify(require('stream').pipeline);
+const { uploadErrors } = require('../utils/errors.utils');
+
+exports.readPost = (req, res) => {
   Post.findOne({ where: { id: req.params.id } })
-    .then((post) => {
+    .then(post => {
       res.status(200).json(post);
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(404).json({
-        error: error,
+        error,
       });
     });
 };
 
-exports.readAllPosts = (req, res, next) => {
+exports.readAllPosts = (req, res) => {
   Post.findAll()
-    .then((posts) => {
+    .then(posts => {
       res.status(200).json(posts);
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(400).json({
-        error: error,
+        error,
       });
     });
 };
 
 module.exports.createPost = async (req, res) => {
   let fileName;
-  console.log("req", req.file);
+  console.log('req', req.file);
 
   if (req.file) {
     try {
       if (
-        req.file.detectedMimeType !== "image/jpg" &&
-        req.file.detectedMimeType !== "image/png" &&
-        req.file.detectedMimeType !== "image/jpeg"
+        req.file.detectedMimeType !== 'image/jpg' &&
+        req.file.detectedMimeType !== 'image/png' &&
+        req.file.detectedMimeType !== 'image/jpeg'
       )
-        throw Error("invalid file");
+        throw Error('invalid file');
 
-      if (req.file.size > 500000) throw Error("max size");
+      if (req.file.size > 500000) throw Error('max size');
 
-      fileName = req.file.posterId + Date.now() + ".jpg";
+      fileName = `${req.file.posterId + Date.now()}.jpg`;
 
       await pipeline(
         req.file.stream,
@@ -54,7 +57,7 @@ module.exports.createPost = async (req, res) => {
         )
       );
     } catch (err) {
-      console.log("error", err);
+      console.log('error', err);
       const errors = uploadErrors(err);
       return res.status(201).json({ errors });
     }
@@ -64,9 +67,9 @@ module.exports.createPost = async (req, res) => {
     posterId: req.body.posterId,
     message: req.body.message,
     picture:
-      req.file !== null && typeof req.file !== "undefined"
-        ? "./uploads/posts/" + fileName
-        : "",
+      req.file !== null && typeof req.file !== 'undefined'
+        ? `./uploads/posts/${fileName}`
+        : '',
     video: req.body.video,
     likers: 0,
   });
@@ -79,20 +82,7 @@ module.exports.createPost = async (req, res) => {
   }
 };
 
-// exports.createPost = (req, res) => {
-//   const newPost = Post.build({
-//     posterId: req.body.posterId,
-//     message: req.body.message,
-//     video: req.body.video,
-//     likers: 0,
-//   });
-//   newPost
-//     .save()
-//     .then(() => res.status(201).json({ message: "Post créé !" }))
-//     .catch((error) => res.status(400).json({ error }));
-// };
-
-exports.updatePost = (req, res, next) => {
+exports.updatePost = (req, res) => {
   Post.update(
     {
       message: req.body.message,
@@ -101,23 +91,23 @@ exports.updatePost = (req, res, next) => {
   )
     .then(() => {
       res.status(201).json({
-        message: "Votre Post a bien été modifié !",
+        message: 'Votre Post a bien été modifié !',
       });
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(400).json({
-        error: error,
+        error,
       });
     });
 };
 
-exports.deletePost = (req, res, next) => {
+exports.deletePost = (req, res) => {
   const userId = req.params.id;
   Post.destroy({ where: { id: userId } })
-    .then((num) => {
+    .then(num => {
       if (num === 1) {
         res.send({
-          message: "Post supprimé!",
+          message: 'Post supprimé!',
         });
       } else {
         res.send({
@@ -125,7 +115,7 @@ exports.deletePost = (req, res, next) => {
         });
       }
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(500).send({
         message: `Could not delete Post with id=${userId}`,
       });
