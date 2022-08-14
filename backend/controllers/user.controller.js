@@ -1,79 +1,83 @@
-const db = require("../models");
-const User = db.user;
-const { Op } = require("sequelize");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const fs = require("fs");
+/* eslint-disable consistent-return */
+/* eslint-disable no-underscore-dangle */
+const db = require('../models');
 
-exports.signup = (req, res, next) => {
+const User = db.user;
+const { Op } = require('sequelize');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
+
+exports.signup = (req, res) => {
+  console.log(req.body.password);
   bcrypt
     .hash(req.body.password, 10)
-    .then((hash) => {
+    .then(hash => {
       const userSignUp = User.build({
         email: req.body.email,
         password: hash,
       });
       userSignUp.save();
-      res.status(201).json({ message: "Utilisateur créé !" });
+      res.status(201).json({ message: 'Utilisateur créé !' });
     })
-    .catch((error) => {
+    .catch(error => {
       console.log(error);
       return res.status(500).json({ error });
     });
 };
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
   console.log(req.body);
   User.findOne({ where: { email: req.body.email } })
-    .then((user) => {
+    .then(user => {
       if (!user) {
-        return res.status(401).json({ error: "Utilisateur non trouvé !" });
+        return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
       bcrypt
         .compare(req.body.password, user.password)
-        .then((valid) => {
+        .then(valid => {
           if (!valid) {
-            return res.status(401).json({ error: "Mot de passe incorrect !" });
+            return res.status(401).json({ error: 'Mot de passe incorrect !' });
           }
           res.status(200).json({
             userId: user._id,
             token: jwt.sign(
               { userId: user._id },
-              "RANDOM_TOKEN", // A REMPLACER //
-              { expiresIn: "12h" }
+              'RANDOM_TOKEN', // A REMPLACER //
+              { expiresIn: '12h' }
             ),
           });
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ error }));
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ error }));
 };
 
-exports.getAllUsers = (req, res, next) => {
+exports.getAllUsers = (req, res) => {
   User.findAll()
-    .then((users) => {
+    .then(users => {
       res.status(200).json(users);
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(400).json({
-        error: error,
+        error,
       });
     });
 };
 
-exports.getOneUser = (req, res, next) => {
+exports.getOneUser = (req, res) => {
   User.findOne({ where: { id: req.params.id } })
-    .then((user) => {
+    .then(user => {
       res.status(200).json(user);
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(404).json({
-        error: error,
+        error,
       });
     });
 };
 
-exports.modifyUser = (req, res, next) => {
+exports.modifyUser = (req, res) => {
   User.update(
     {
       email: req.body.email,
@@ -86,23 +90,23 @@ exports.modifyUser = (req, res, next) => {
   )
     .then(() => {
       res.status(201).json({
-        message: "Votre profil a bien été modifié !",
+        message: 'Votre profil a bien été modifié !',
       });
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(400).json({
-        error: error,
+        error,
       });
     });
 };
 
-exports.deleteUser = (req, res, next) => {
+exports.deleteUser = (req, res) => {
   const userId = req.params.id;
   User.destroy({ where: { id: userId } })
-    .then((num) => {
+    .then(num => {
       if (num === 1) {
         res.send({
-          message: "Utilisateur supprimé!",
+          message: 'Utilisateur supprimé!',
         });
       } else {
         res.send({
@@ -110,7 +114,7 @@ exports.deleteUser = (req, res, next) => {
         });
       }
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(500).send({
         message: `Could not delete User with id=${userId}`,
       });
