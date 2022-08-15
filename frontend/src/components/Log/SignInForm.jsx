@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const SignInForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [loginError, setLoginError] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const emailError = document.querySelector(".email.error");
-    const passwordError = document.querySelector(".password.error");
+    setLoginError(false);
 
     axios({
       method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/user/login`,
+      url: `${process.env.REACT_APP_API_URL}/api/user/login`,
       withCredentials: true,
       data: {
         email,
@@ -20,14 +20,16 @@ const SignInForm = () => {
       },
     })
       .then((res) => {
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
-          passwordError.innerHTML = res.data.errors.password;
-        } else {
+        if (res.data.token && res.data.userId) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("userId", res.data.userId);
           window.location = "/";
         }
       })
       .catch((err) => {
+        if (err.code === "ERR_BAD_REQUEST") {
+          setLoginError(true);
+        }
         console.log(err);
       });
   };
@@ -43,7 +45,6 @@ const SignInForm = () => {
         onChange={(e) => setEmail(e.target.value)}
         value={email}
       />
-      <div className="email error"></div>
       <br />
       <label htmlFor="password">Mot de passe</label>
       <br />
@@ -54,7 +55,7 @@ const SignInForm = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      <div className="password error"></div>
+      {loginError && <div className="">Email ou Mot de passe incorrect!</div>}
       <br />
       <input type="submit" value="Se connecter" />
     </form>

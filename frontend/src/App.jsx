@@ -3,23 +3,31 @@ import { UidContext } from "./components/AppContext.jsx";
 import Routes from "./components/Routes/index.jsx";
 import axios from "axios";
 
-const App = () => {
-  const [uid, setUid] = useState(null);
+const apiUrl = process.env.REACT_APP_API_URL;
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      await axios({
-        method: "get",
-        url: `${process.env.REACT_APP_API_URL}jwtid`,
-        withCredentials: true,
-      })
-        .then((res) => setUid(res.data))
-        .catch((err) => console.log("No Token"));
-    };
-    fetchToken();
-  }, [uid]);
+axios.interceptors.request.use(
+  (config) => {
+    const { origin } = new URL(config.url);
+    const allowedOrigins = [apiUrl];
+    const token = localStorage.getItem("token");
+    console.log("ICI", origin, allowedOrigins);
+    if (allowedOrigins.includes(origin)) {
+      console.log("ici", token);
+      config.headers.authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+const App = () => {
+  const jwt = localStorage.getItem("token");
+  const [token, setToken] = useState(jwt || null);
+
   return (
-    <UidContext.Provider value={uid}>
+    <UidContext.Provider value={token}>
       <Routes />
     </UidContext.Provider>
   );
