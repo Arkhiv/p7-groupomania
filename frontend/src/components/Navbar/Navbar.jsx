@@ -5,20 +5,8 @@ import { UidContext } from "../AppContext";
 import Logout from "../Log/Logout";
 
 const Navbar = () => {
-  const userId = localStorage.getItem("userId");
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_URL}/api/user/${userId}`,
-      withCredentials: true,
-    })
-      .then((res) => {
-        console.log(res);
-        setUser(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [userId]);
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(localUser || null);
 
   const uid = useContext(UidContext);
   if (!user) return null;

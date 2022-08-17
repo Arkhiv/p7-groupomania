@@ -1,6 +1,9 @@
+/* eslint-disable consistent-return */
 const fs = require('fs');
 const { promisify } = require('util');
-const UserModel = require('../models/user.model');
+const db = require('../models');
+
+const User = db.user;
 const pipeline = promisify(require('stream').pipeline);
 const { uploadErrors } = require('../utils/errors.utils');
 
@@ -23,20 +26,23 @@ module.exports.uploadProfil = async (req, res) => {
   await pipeline(
     req.file.stream,
     fs.createWriteStream(
-      `${__dirname}/../client/public/uploads/profil/${fileName}`
+      `${__dirname}/../../frontend/public/uploads/profil/${fileName}`
     )
   );
   try {
-    await UserModel.findByIdAndUpdate(
-      req.body.userId,
-      { $set: { picture: `./uploads/profil/${fileName}` } },
-      { new: true, upsert: true, setDefaultsOnInsert: true },
-      (err, docs) => {
-        if (!err) return res.send(docs);
-        return res.status(500).send({ message: err });
-      }
+    const [updatedRows] = await User.update(
+      {
+        picture: `./uploads/profil/${fileName}`,
+      },
+      { where: { id: req.body.userId } }
     );
+    if (updatedRows) {
+      console.log(`Updated rows: ${updatedRows}`);
+    } else {
+      console.log('User not found');
+    }
   } catch (err) {
+    console.log('ici', err);
     return res.status(500).send({ message: err });
   }
 };

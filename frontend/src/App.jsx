@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UidContext } from "./components/AppContext.jsx";
 import Routes from "./components/Routes/index.jsx";
 import axios from "axios";
@@ -10,9 +10,7 @@ axios.interceptors.request.use(
     const { origin } = new URL(config.url);
     const allowedOrigins = [apiUrl];
     const token = localStorage.getItem("token");
-    console.log("ICI", origin, allowedOrigins);
     if (allowedOrigins.includes(origin)) {
-      console.log("ici", token);
       config.headers.authorization = `Bearer ${token}`;
     }
     return config;
@@ -25,6 +23,19 @@ axios.interceptors.request.use(
 const App = () => {
   const jwt = localStorage.getItem("token");
   const [token, setToken] = useState(jwt || null);
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_URL}/api/user/${userId}`,
+      withCredentials: true,
+    })
+      .then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data));
+      })
+      .catch((err) => console.log(err));
+  }, [userId]);
 
   return (
     <UidContext.Provider value={token}>
