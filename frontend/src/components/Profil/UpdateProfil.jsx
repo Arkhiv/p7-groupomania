@@ -3,10 +3,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { UidContext } from "../AppContext";
 import UploadImg from "./UploadImg";
 import { NavLink } from "react-router-dom";
+import UpdateBio from "./UpdateBio";
 
 const UpdateProfil = () => {
+  const localUser = localStorage.getItem("user");
   const userId = localStorage.getItem("userId");
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     axios({
       method: "get",
@@ -32,6 +35,9 @@ const UpdateProfil = () => {
               <h3>Photo de profil</h3>
               <img src={user.picture} alt="PROFILPIC" />
               <UploadImg />
+            </div>
+            <div className="bio-component">
+              <UpdateBio />
             </div>
           </div>
         </>

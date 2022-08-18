@@ -17,8 +17,6 @@ const UploadImg = () => {
     formData.append("name", user.pseudo);
     formData.append("userId", user.id);
 
-    console.log(formData);
-
     const config = {
       headers: {
         "content-type": "multipart/form-data",

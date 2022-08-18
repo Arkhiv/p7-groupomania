@@ -30,19 +30,17 @@ module.exports.uploadProfil = async (req, res) => {
     )
   );
   try {
-    const [updatedRows] = await User.update(
+    User.update(
       {
         picture: `./uploads/profil/${fileName}`,
       },
       { where: { id: req.body.userId } }
-    );
-    if (updatedRows) {
-      console.log(`Updated rows: ${updatedRows}`);
-    } else {
-      console.log('User not found');
-    }
+    ).then(() => {
+      res.status(201).json({
+        message: 'Votre profil a bien été modifié !',
+      });
+    });
   } catch (err) {
-    console.log('ici', err);
     return res.status(500).send({ message: err });
   }
 };
