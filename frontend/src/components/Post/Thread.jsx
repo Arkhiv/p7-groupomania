@@ -12,7 +12,7 @@ const Thread = () => {
       withCredentials: true,
     })
       .then((res) => {
-        setLoadPosts(res.data);
+        setLoadPosts(false);
       })
       .catch((err) => console.log(err));
   }, [loadPosts]);
