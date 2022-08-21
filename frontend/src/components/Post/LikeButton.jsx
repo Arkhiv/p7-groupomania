@@ -12,6 +12,7 @@ const LikeButton = ({ post }) => {
 
   useEffect(() => {
     if (post.likers.includes(uid)) setLiked(true);
+    else setLiked(false);
   }, [uid, post.likers, liked]);
 
   return (
@@ -35,6 +36,7 @@ const LikeButton = ({ post }) => {
           onClick={unlike}
         ></img>
       )}
+      <span>{post.likers.length}</span>
     </div>
   );
 };

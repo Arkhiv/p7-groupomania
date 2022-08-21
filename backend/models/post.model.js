@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Post = sequelize.define(
-    "post",
+    'post',
     {
       posterId: {
         type: Sequelize.STRING,
@@ -19,7 +19,7 @@ module.exports = (sequelize, Sequelize) => {
       },
 
       likers: {
-        type: Sequelize.INTEGER,
+        type: [String],
       },
     },
     {

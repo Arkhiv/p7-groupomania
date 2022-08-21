@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { UidContext } from "../AppContext";
 import Logout from "../Log/Logout";
@@ -25,7 +24,7 @@ const Navbar = () => {
           <ul>
             <li className="welcome">
               <NavLink exact to="/profil">
-                <h5>Bienvenue {user.pseudo}</h5>
+                <h5>Bienvenue {localUser.pseudo}</h5>
               </NavLink>
             </li>
             <Logout />
