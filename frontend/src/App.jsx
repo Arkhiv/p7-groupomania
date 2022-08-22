@@ -3,6 +3,12 @@ import { UidContext } from "./components/AppContext.jsx";
 import Routes from "./components/Routes/index.jsx";
 import axios from "axios";
 
+// FA
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+library.add(faSignOut);
+//
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 axios.interceptors.request.use(

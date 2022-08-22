@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import { UidContext } from "../AppContext";
 import Logout from "../Log/Logout";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Navbar = () => {
   const localUser = JSON.parse(localStorage.getItem("user"));
   const [user, setUser] = useState(localUser || null);
@@ -15,8 +17,12 @@ const Navbar = () => {
         <div className="logo">
           <NavLink exact to="/">
             <div className="logo">
-              <img src="" alt="" />
-              <h3>Groupomania Network</h3>
+              <img
+                src="../../../public/img/groupomaniaPng.png"
+                alt=""
+                height="80px"
+                width="80px"
+              />
             </div>
           </NavLink>
         </div>
@@ -32,8 +38,9 @@ const Navbar = () => {
         ) : (
           <ul>
             <li>
-              <NavLink exact to="/profil"></NavLink>
-              <img src="" alt="LOGOUTLOGO" />
+              <NavLink exact to="/profil">
+                <FontAwesomeIcon icon="fas fa-sign-out-alt" />
+              </NavLink>
             </li>
           </ul>
         )}

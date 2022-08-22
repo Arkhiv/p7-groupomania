@@ -1,0 +1,12 @@
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-container ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+}
