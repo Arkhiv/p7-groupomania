@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { UidContext } from "../AppContext";
 import Logout from "../Log/Logout";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import S from "./Navbar.module.css";
+import logo from "../../assets/img/groupomaniaSvg.svg";
 
 const Navbar = () => {
   const localUser = JSON.parse(localStorage.getItem("user"));
@@ -12,20 +12,11 @@ const Navbar = () => {
   const uid = useContext(UidContext);
   if (!user) return null;
   return (
-    <nav>
-      <div className="nav-container">
-        <div className="logo">
-          <NavLink exact to="/">
-            <div className="logo">
-              <img
-                src="../../../public/img/groupomaniaPng.png"
-                alt=""
-                height="80px"
-                width="80px"
-              />
-            </div>
-          </NavLink>
-        </div>
+    <nav className={S.navContainer}>
+      <div className={S.navBlock}>
+        <NavLink exact to="/">
+          <img className="logo" src={logo} alt="" />
+        </NavLink>
         {uid ? (
           <ul>
             <li className="welcome">
@@ -35,15 +26,7 @@ const Navbar = () => {
             </li>
             <Logout />
           </ul>
-        ) : (
-          <ul>
-            <li>
-              <NavLink exact to="/profil">
-                <FontAwesomeIcon icon="fas fa-sign-out-alt" />
-              </NavLink>
-            </li>
-          </ul>
-        )}
+        ) : null}
       </div>
     </nav>
   );

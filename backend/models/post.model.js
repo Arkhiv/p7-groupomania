@@ -19,7 +19,7 @@ module.exports = (sequelize, Sequelize) => {
       },
 
       likers: {
-        type: [String],
+        type: Sequelize.JSON,
       },
     },
     {

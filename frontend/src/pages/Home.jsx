@@ -10,7 +10,6 @@ const Home = () => {
     <div className="home-page">
       {uid ? (
         <>
-          <AddPostForm />
           <Thread />
         </>
       ) : (

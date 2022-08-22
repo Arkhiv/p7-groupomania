@@ -3,23 +3,26 @@ import { NavLink } from "react-router-dom";
 import { dateParser } from "../Utils";
 import axios from "axios";
 
-const AddPostForm = () => {
+const AddPostForm = ({ reloadPosts }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [postMessage, setPostMessage] = useState("");
-  const [postPicture, setPostPicture] = useState(null);
+  const [postPicture, setPostPicture] = useState("");
   const [file, setFile] = useState(null);
 
   const handleNewPost = async () => {
+    console.log(postMessage, postPicture);
     if (postMessage || postPicture) {
       const url = `${process.env.REACT_APP_API_URL}/api/post/`;
       const postFormData = new FormData();
       postFormData.append("posterId", user.id);
       postFormData.append("message", postMessage);
-      if (file) postFormData.append("file", file);
+
+      if (file) postFormData.append("picture", file);
 
       await axios.post(url, postFormData).then((response) => {
         console.log(response.data);
         cancelPost();
+        reloadPosts();
       });
     } else {
       alert("Votre post est vide !");
@@ -27,16 +30,20 @@ const AddPostForm = () => {
   };
 
   function handlePostPicture(e) {
+    console.log(e.target.files[0]);
     setPostPicture(URL.createObjectURL(e.target.files[0]));
     setFile(e.target.files[0]);
   }
 
-  function handlePostMessage(e) {}
+  function handlePostMessage(e) {
+    console.log(e);
+    setPostMessage(e.target.value);
+  }
 
   const cancelPost = () => {
     setPostMessage("");
     setPostPicture("");
-    setFile("");
+    setFile(null);
   };
 
   useEffect(() => {});
@@ -90,7 +97,11 @@ const AddPostForm = () => {
                 </button>
               ) : null}
 
-              <button className="send" onClick={handleNewPost}>
+              <button
+                className="send"
+                onClick={handleNewPost}
+                disabled={!postMessage && !postPicture}
+              >
                 Partager !
               </button>
             </div>

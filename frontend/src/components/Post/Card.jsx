@@ -19,8 +19,8 @@ const Card = ({ post }) => {
 
     axios.put(url, formData).then((response) => {
       console.log(response.data);
+      setIsUpdated(true);
     });
-    setIsUpdated(false);
   };
 
   useEffect(() => {
@@ -30,16 +30,13 @@ const Card = ({ post }) => {
       withCredentials: true,
     })
       .then((res) => {
-        setLoadUsers(false);
+        setLoadUsers(res.data);
       })
       .catch((err) => console.log(err));
-  }, [loadUsers]);
-
+  }, []);
   return (
     <>
-      <li className="card-container" key={post.id}>
-        CARD
-      </li>
+      <li className="card-container" key={post.id}></li>
       <></>
       <div className="card-left">
         <img
@@ -47,8 +44,11 @@ const Card = ({ post }) => {
             !!loadUsers[0] &&
             loadUsers
               .map((user) => {
-                if (user.id === post.posterId) return user.picture;
-                else return null;
+                console.log(user.id, post.posterId);
+                if (user.id.toString() === post.posterId) {
+                  console.log(user.picture);
+                  return user.picture;
+                } else return null;
               })
               .join("")
           }
@@ -93,9 +93,7 @@ const Card = ({ post }) => {
             <DeleteCard id={post.id} />
           </div>
         )}
-        <div className="card-footer">
-          <LikeButton post={post} />
-        </div>
+        <div className="card-footer">{/* <LikeButton post={post} /> */}</div>
       </div>
     </>
   );

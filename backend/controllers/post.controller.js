@@ -35,7 +35,6 @@ exports.readAllPosts = (req, res) => {
 
 module.exports.createPost = async (req, res) => {
   let fileName;
-  console.log('req', req.file);
 
   if (req.file) {
     try {
@@ -46,14 +45,16 @@ module.exports.createPost = async (req, res) => {
       )
         throw Error('invalid file');
 
-      if (req.file.size > 500000) throw Error('max size');
+      if (req.file.size > 5000000) throw Error('max size');
 
-      fileName = `${req.file.posterId + Date.now()}.jpg`;
+      fileName = `${req.body.posterId}_${Date.now().toString()}.jpg`;
+
+      console.log('SALUTUUT', fileName);
 
       await pipeline(
         req.file.stream,
         fs.createWriteStream(
-          `${__dirname}/../../frontend/client/uploads/posts/${fileName}`
+          `${__dirname}/../../frontend/public/uploads/posts/${fileName}`
         )
       );
     } catch (err) {

@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 const Logout = () => {
   const logout = async () => {
@@ -7,7 +9,7 @@ const Logout = () => {
   };
   return (
     <li onClick={logout}>
-      <img src="" alt="LOGOLOGOUT" />
+      <FontAwesomeIcon icon={faSignOut} color="black" />
     </li>
   );
 };
