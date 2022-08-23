@@ -89,9 +89,7 @@ exports.modifyUser = (req, res) => {
     { where: { id: req.params.id } }
   )
     .then(() => {
-      res.status(201).json({
-        message: 'Votre profil a bien été modifié !',
-      });
+      res.status(201).json({ message: 'Votre profil a bien été modifié !' });
     })
     .catch(error => {
       res.status(400).json({

@@ -1,18 +1,17 @@
 .navContainer {
     border-bottom: solid 3px #ffd7d7;
-    max-height: 10vh;
+    height: 10vh;
 }
 
 .navBlock {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    align-content: center;
+    height: inherit;
 }
 
 .navContainer img {
     width: 100%;
-    height: 35vh;
 }
 
 .navContainer ul {
@@ -24,5 +23,23 @@
     list-style: none;
 }
 
-.logo {
+li a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: #4e5166;
+}
+
+li a:hover {
+    color: #fd2d01;
+}
+
+li svg {
+    text-decoration: none;
+    font-size: 1.6rem;
+    color: #4e5166;
+    cursor: pointer;
+}
+
+li svg:hover {
+    color: #fd2d01;
 }

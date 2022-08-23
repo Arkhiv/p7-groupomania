@@ -122,3 +122,24 @@ exports.deletePost = (req, res) => {
       });
     });
 };
+
+// exports.like = (req, res) => {
+//   const userId = req.params.id;
+//   Post.put({ where: { id: userId } })
+//     .then(num => {
+//       if (num === 1) {
+//         res.send({
+//           message: 'Post supprimé!',
+//         });
+//       } else {
+//         res.send({
+//           message: `Cannot delete Post with id=${userId}. Maybe Post was not found!`,
+//         });
+//       }
+//     })
+//     .catch(() => {
+//       res.status(500).send({
+//         message: `Could not delete Post with id=${userId}`,
+//       });
+//     });
+// };

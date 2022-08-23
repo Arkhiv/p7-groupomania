@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { dateParser } from "../Utils";
 import axios from "axios";
+import S from "./Post.module.css";
+import cx from "classnames";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 
 const AddPostForm = ({ reloadPosts }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [postMessage, setPostMessage] = useState("");
   const [postPicture, setPostPicture] = useState("");
   const [file, setFile] = useState(null);
+  const [labelText, setLabelText] = useState("Choisir une image");
 
   const handleNewPost = async () => {
     console.log(postMessage, postPicture);
@@ -33,6 +39,7 @@ const AddPostForm = ({ reloadPosts }) => {
     console.log(e.target.files[0]);
     setPostPicture(URL.createObjectURL(e.target.files[0]));
     setFile(e.target.files[0]);
+    setLabelText(e.target.files[0].name);
   }
 
   function handlePostMessage(e) {
@@ -49,66 +56,75 @@ const AddPostForm = ({ reloadPosts }) => {
   useEffect(() => {});
 
   return (
-    <div className="post-form-container">
-      <div className="user-data">
-        <NavLink exact to="/profil">
-          <div className="user-info">
-            <img src={user.picture} alt="user-img" />
+    <>
+      <div className={S.postFormContainer}>
+        <div className={S.postFormWrapper}>
+          <div className={S.userData}>
+            <NavLink exact to="/profil">
+              <img src={user.picture} alt="user-img"></img>
+            </NavLink>
           </div>
-        </NavLink>
-        <div className="post-form">
-          <textarea
-            name="message"
-            id="message"
-            placeholder="Partagez avec Groupomania !"
-            onChange={handlePostMessage}
-          />
-          {postMessage || postPicture ? (
-            <li className="post-preview">
-              <div className="left-preview">
-                <img src={user.picture} alt="user-pic-preview" />
-              </div>
-              <div className="right-preview">
-                <div className="header-preview">
-                  <div className="pseudo">
-                    <h3>{user.pseudo}</h3>
-                  </div>
-                  <span>{dateParser(Date.now())}</span>
-                </div>
-                <div className="message-preview">
-                  <p>{postMessage}</p>
-                  <img src={postPicture} alt="" />
-                </div>
-              </div>
-            </li>
-          ) : null}
-          <div className="footer-form">
-            <input
-              type="file"
-              id="file-upload"
-              name="file"
-              accept=".jpg, .jpeg,.png"
-              onChange={(e) => handlePostPicture(e)}
+          <div className={S.postForm}>
+            <textarea
+              name="message"
+              id="message"
+              placeholder="Partagez avec Groupomania !"
+              onChange={handlePostMessage}
             />
-            <div className="btn-post-form-send">
-              {postMessage || postPicture ? (
-                <button className="cancel" onClick={cancelPost}>
-                  Annuler
+            <div className={S.footerForm}>
+              <input
+                className={S.inputFile}
+                type="file"
+                id="file-upload"
+                name="file"
+                accept=".jpg, .jpeg,.png"
+                onChange={(e) => handlePostPicture(e)}
+              />
+              <label className={cx(file && S.selected)} htmlFor="file-upload">
+                {labelText}
+              </label>
+              <div className="btn-post-form-send">
+                <button
+                  className={S.sendPostForm}
+                  onClick={handleNewPost}
+                  disabled={!postMessage && !postPicture}
+                >
+                  Partager !
                 </button>
-              ) : null}
-
-              <button
-                className="send"
-                onClick={handleNewPost}
-                disabled={!postMessage && !postPicture}
-              >
-                Partager !
-              </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div className={S.postPreview}>
+        {postMessage || postPicture ? (
+          <div className={S.postPreviewWrapper}>
+            <div className={S.leftPreview}>
+              <img src={user.picture} alt="user-pic-preview" />
+              {postMessage || postPicture ? (
+                <button className={S.cancel} onClick={cancelPost}>
+                  <FontAwesomeIcon icon={faXmarkCircle} />
+                </button>
+              ) : null}
+            </div>
+            <div className={S.rightPreview}>
+              <div className={S.headerPreview}>
+                <div className="pseudo">
+                  <h3>{user.pseudo}</h3>
+                </div>
+                <span>{dateParser(Date.now())}</span>
+              </div>
+              <div className={S.messagePreview}>
+                <p>{postMessage}</p>
+              </div>
+              <div className={S.messagePicPreview}>
+                <img src={postPicture} alt="" />
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </>
   );
 };
 

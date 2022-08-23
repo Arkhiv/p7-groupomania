@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { UidContext } from "../AppContext";
 import Logout from "../Log/Logout";
@@ -8,6 +8,12 @@ import logo from "../../assets/img/groupomaniaSvg.svg";
 const Navbar = () => {
   const localUser = JSON.parse(localStorage.getItem("user"));
   const [user, setUser] = useState(localUser || null);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("user")).id !== localUser.id) {
+      setUser(JSON.parse(localStorage.getItem("user")));
+    }
+  }, [JSON.parse(localStorage.getItem("user")), setUser]);
 
   const uid = useContext(UidContext);
   if (!user) return null;

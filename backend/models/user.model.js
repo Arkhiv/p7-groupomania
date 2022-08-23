@@ -24,8 +24,7 @@ module.exports = (sequelize, Sequelize) => {
       default: '',
     },
     bio: {
-      type: Sequelize.STRING,
-      max: 1024,
+      type: Sequelize.STRING(1024),
     },
   });
   return User;

@@ -1,0 +1,212 @@
+.postFormContainer {
+    background-color: #ffd7d7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    border-radius: 16px;
+    margin: 2%;
+}
+
+.userData img {
+    height: auto;
+    width: 15%;
+    border-radius: 16px;
+    padding: 5px;
+}
+
+.userData {
+    text-align: center;
+}
+
+.userData a {
+    width: inherit;
+    height: inherit;
+}
+
+.postForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding: 2%;
+    gap: 5px;
+}
+
+.postForm textarea {
+    width: 60%;
+    height: auto;
+    padding: 0.5% 0;
+    border: 2px solid #4e5166;
+    border-radius: 16px;
+    background-color: #fff;
+    font-size: 16px;
+    text-align: center;
+    resize: none;
+}
+
+.inputFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.footerForm {
+    display: flex;
+    align-items: center;
+}
+
+.footerForm label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 16px;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: 0.3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #4e5166;
+    box-shadow: inset 0 0 0 2px #4e5166;
+    background-color: transparent;
+    height: auto;
+}
+
+.footerForm label:hover {
+    color: #ffd7d7;
+    background-color: #4e5166;
+}
+
+.footerForm label.selected {
+    color: #fd2d01;
+}
+
+.footerForm label.selected:hover {
+    color: #fd2d01;
+}
+
+.sendPostForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 16px;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: 0.3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #4e5166;
+    box-shadow: inset 0 0 0 2px #5f5f66;
+    background-color: transparent;
+    height: auto;
+}
+
+.sendPostForm:hover {
+    color: #ffd7d7;
+    background-color: #4e5166;
+}
+
+.postFormWrapper {
+    width: 100%;
+}
+
+.postPreview {
+    border: solid 2px #ffd7d7;
+    display: flex;
+    margin: 2%;
+}
+
+.postPreviewWrapper {
+    display: flex;
+    width: 100%;
+    padding: 1%;
+}
+
+.leftPreview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2%;
+}
+
+.leftPreview img {
+    height: 10%;
+    width: auto;
+    border-radius: 16px;
+}
+
+.rightPreview {
+    padding: 2%;
+    width: 100%;
+}
+
+.headerPreview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1%;
+}
+
+.messagePreview {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1%;
+}
+
+.messagePicPreview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.messagePicPreview p {
+    overflow-wrap: anywhere;
+}
+
+.cancel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 30px;
+    line-height: 1;
+    border-radius: 16px;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: 0.3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    color: #4e5166;
+    box-shadow: inset 0 0 0 2px #5f5f66;
+    background-color: transparent;
+    height: auto;
+}
+
+.cancel:hover {
+    color: #ffd7d7;
+    background-color: #4e5166;
+}

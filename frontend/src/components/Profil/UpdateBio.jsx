@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { dateParser } from "../Utils";
+import S from "./Profil.module.css";
 
 const UpdateBio = () => {
   const [updateForm, setUpdateForm] = useState(false);
@@ -16,10 +17,13 @@ const UpdateBio = () => {
     const url = `${process.env.REACT_APP_API_URL}/api/user/${user.id}`;
     const formData = new FormData();
     formData.append("bio", bio);
-    formData.append("userId", user.id);
 
-    axios.put(url, formData).then((response) => {
+    axios.put(url, { bio }).then((response) => {
       console.log(response.data);
+      axios.get(url).then((res) => {
+        localStorage.setItem("user", JSON.stringify(res.data));
+        setUpdateForm(false);
+      });
     });
   }
 
@@ -29,25 +33,36 @@ const UpdateBio = () => {
     <>
       <div className="bio-container"></div>
       <div className="bio-update">
-        <h3>Bio</h3>
-        {updateForm === false && (
-          <>
-            <p onClick={() => setUpdateForm(!updateForm)}>{user.bio}</p>
-            <button onClick={() => setUpdateForm(!updateForm)}>
-              Modifier la description
-            </button>
-          </>
-        )}
-        {updateForm && (
-          <>
-            <textarea
-              type="text"
-              defaultValue={user.bio}
-              onChange={handleChange}
-            ></textarea>
-            <button onClick={handleBio}>Valider modifications</button>
-          </>
-        )}
+        <div className={S.bioWrapper}>
+          <h3>Bio</h3>
+          {updateForm === false && (
+            <>
+              <div className={S.bioWrapper2}>
+                <p onClick={() => setUpdateForm(!updateForm)}>{user.bio}</p>
+                <button
+                  className={S.bioButton}
+                  onClick={() => setUpdateForm(!updateForm)}
+                >
+                  Modifier la description
+                </button>
+              </div>
+            </>
+          )}
+          {updateForm && (
+            <>
+              <div className={S.bioWrapper2}>
+                <textarea
+                  type="text"
+                  defaultValue={user.bio}
+                  onChange={handleChange}
+                ></textarea>
+                <button className={S.bioButton} onClick={handleBio}>
+                  Valider modifications
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
       <h4> Membre depuis le : {dateParser(user.createdAt)}</h4>
     </>

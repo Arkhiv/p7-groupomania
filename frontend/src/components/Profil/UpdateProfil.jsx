@@ -4,6 +4,7 @@ import { UidContext } from "../AppContext";
 import UploadImg from "./UploadImg";
 import { NavLink } from "react-router-dom";
 import UpdateBio from "./UpdateBio";
+import S from "./Profil.module.css";
 
 const UpdateProfil = () => {
   const localUser = localStorage.getItem("user");
@@ -26,17 +27,21 @@ const UpdateProfil = () => {
   if (!user) return null;
 
   return (
-    <div>
+    <div className={S.profilUpdateContainer}>
       {uid ? (
         <>
-          <h1>Profil de {user.pseudo}</h1>
-          <div className="update-container">
-            <div className="picture-container">
+          <h1>
+            Profil de<p>{"" + user.pseudo}</p>
+          </h1>
+          <div className={S.updateContainer}>
+            <div className={S.pictureContainer}>
               <h3>Photo de profil</h3>
-              <img src={user.picture} alt="PROFILPIC" />
+              <div className={S.pictureWrapper}>
+                <img src={user.picture} alt="PROFILPIC" />
+              </div>
               <UploadImg />
             </div>
-            <div className="bio-component">
+            <div className={S.bioContainer}>
               <UpdateBio />
             </div>
           </div>

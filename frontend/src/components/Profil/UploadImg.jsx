@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import S from "./Profil.module.css";
+import cx from "classnames";
 
 const UploadImg = () => {
   const [file, setFile] = useState();
+  const [labelText, setLabelText] = useState("Choisir une image");
   const user = JSON.parse(localStorage.getItem("user"));
 
   function handleChange(event) {
     setFile(event.target.files[0]);
+    setLabelText(event.target.files[0].name);
   }
 
   function handlePicture(e) {
@@ -28,23 +32,28 @@ const UploadImg = () => {
   }
 
   return (
-    <form
-      action=""
-      onSubmit={handlePicture}
-      className="upload-pic"
-      encType="multipart/form-data"
-    >
-      <label htmlFor="file">Modifier l'image de profil</label>
-      <input
-        type="file"
-        id="file"
-        name="file"
-        accept=".jpg, .jpeg, .png"
-        onChange={handleChange}
-      />
-      <br />
-      <input type="submit" value="Envoyer" />
-    </form>
+    <>
+      <form
+        action=""
+        onSubmit={handlePicture}
+        className={S.formUploadPic}
+        encType="multipart/form-data"
+      >
+        <input
+          className={S.inputFile}
+          type="file"
+          id="file"
+          name="file"
+          accept=".jpg, .jpeg, .png"
+          onChange={handleChange}
+        />
+        <label className={cx(file && S.selected)} htmlFor="file">
+          {labelText}
+        </label>
+        <br />
+        <button type="submit">Envoyer !</button>
+      </form>
+    </>
   );
 };
 

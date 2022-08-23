@@ -1,0 +1,208 @@
+.profilPage {
+    color: #4e5166;
+}
+
+.profilUpdateContainer h1 {
+    display: flex;
+    justify-content: center;
+    gap: 0.5%;
+    padding-top: 1%;
+}
+
+.profilUpdateContainer p {
+    color: #fd2d01;
+}
+
+.updateContainer {
+    display: flex;
+    gap: 5%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5%;
+    margin: 2%;
+}
+
+.pictureContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    background-color: #ffd7d7;
+    border-bottom-left-radius: 8%;
+    border-top-right-radius: 8%;
+    height: 42.5vh;
+}
+.pictureWrapper {
+    border-bottom-left-radius: 8%;
+    border-top-right-radius: 8%;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+}
+.pictureWrapper img {
+    height: 100%;
+    width: auto;
+    margin: auto;
+}
+.pictureContainer form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 5px;
+}
+.pictureContainer h3 {
+    padding: 10px;
+}
+
+.formUploadPic button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 500px;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: 0.3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #4e5166;
+    box-shadow: inset 0 0 0 2px #5f5f66;
+    background-color: transparent;
+    height: 48px;
+}
+
+.formUploadPic button:hover {
+    color: #ffd7d7;
+    background-color: #4e5166;
+}
+
+.formUploadPic label.selected {
+    color: #fd2d01;
+}
+
+.formUploadPic label.selected:hover {
+    color: #fd2d01;
+}
+
+.inputFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.formUploadPic label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 500px;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: 0.3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #4e5166;
+    box-shadow: inset 0 0 0 2px #4e5166;
+    background-color: transparent;
+    height: 15px;
+}
+.formUploadPic label:hover {
+    color: #ffd7d7;
+    background-color: #4e5166;
+}
+
+.bioContainer {
+    width: 50%;
+    background-color: #ffd7d7;
+    border-bottom-right-radius: 8%;
+    border-top-left-radius: 8%;
+    height: 42.5vh;
+}
+
+.bioContainer h3 {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.bioWrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.bioContainer h4 {
+    text-align: center;
+}
+
+.bioButton {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 500px;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: 0.3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #4e5166;
+    box-shadow: inset 0 0 0 2px #4e5166;
+    background-color: transparent;
+    height: 15px;
+}
+
+.bioButton:hover {
+    color: #ffd7d7;
+    background-color: #4e5166;
+}
+
+.bioWrapper2 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2%;
+    gap: 1rem;
+}
+
+.bioWrapper2 p {
+    color: #4e5166;
+    text-align: center;
+}
+
+.bioWrapper2 textarea {
+    width: 100%;
+    height: auto;
+    padding: 20% 20%;
+    border: 2px solid #4e5166;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 16px;
+    resize: none;
+}
