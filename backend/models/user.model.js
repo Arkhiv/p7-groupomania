@@ -12,10 +12,9 @@ module.exports = (sequelize, Sequelize) => {
       required: true,
     },
     pseudo: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(55),
       required: true,
       minLength: 3,
-      maxLength: 55,
       unique: true,
       trimp: true,
     },

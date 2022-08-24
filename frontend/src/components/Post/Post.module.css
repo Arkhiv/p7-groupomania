@@ -141,16 +141,18 @@
 }
 
 .leftPreview {
+    width: 15%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2%;
+    gap: 3%;
 }
 
 .leftPreview img {
-    height: 10%;
-    width: auto;
+    height: auto;
+    width: 50%;
     border-radius: 16px;
+    padding-bottom: 5px;
 }
 
 .rightPreview {
@@ -209,4 +211,109 @@
 .cancel:hover {
     color: #ffd7d7;
     background-color: #4e5166;
+}
+
+.cardContainer {
+    display: flex;
+    background-color: #ffd7d7;
+    margin: 2%;
+    border-radius: 16px;
+}
+
+.cardLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2%;
+    width: 15%;
+    margin: 2%;
+}
+.cardLeft img {
+    height: auto;
+    width: 50%;
+    border-radius: 16px;
+}
+
+.cardRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1%;
+}
+
+.cardRight img {
+    height: auto;
+    width: 30%;
+    text-align: center;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardHeader h3 {
+    font-size: 1.5rem;
+}
+
+.cardFooter {
+}
+
+.deletePost {
+    font-size: 2rem;
+    color: #4e5166;
+    cursor: pointer;
+}
+
+.deletePost:hover {
+    color: #fd2d01;
+}
+
+.updatePost {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 16px;
+    transition-property: background-color, border-color, color, box-shadow, filter;
+    transition-duration: 0.3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #4e5166;
+    box-shadow: inset 0 0 0 2px #5f5f66;
+    background-color: transparent;
+    height: auto;
+}
+
+.updatePost:hover {
+    color: #ffd7d7;
+    background-color: #4e5166;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1%;
+}
+
+.postTextArea textarea {
+    width: 60%;
+    height: auto;
+    padding: 24px;
+    border: 2px solid #4e5166;
+    border-radius: 16px;
+    background-color: #fff;
+    font-size: 16px;
+    text-align: center;
+    resize: none;
 }

@@ -4,9 +4,12 @@ import { dateParser } from "../Utils";
 import LikeButton from "./LikeButton";
 import DeleteCard from "./DeleteCard";
 
-const Card = ({ post }) => {
+import S from "./Post.module.css";
+
+const Card = ({ post, getAllPosts }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [loadUsers, setLoadUsers] = useState(true);
-  const [isUpdated, setIsUpdated] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [message, setMessage] = useState(null);
 
   function handleMessage(e) {
@@ -17,9 +20,10 @@ const Card = ({ post }) => {
     const formData = new FormData();
     formData.append("message", message);
 
-    axios.put(url, formData).then((response) => {
+    axios.put(url, { message }).then((response) => {
       console.log(response.data);
-      setIsUpdated(true);
+      setIsUpdating(false);
+      getAllPosts();
     });
   };
 
@@ -34,19 +38,16 @@ const Card = ({ post }) => {
       })
       .catch((err) => console.log(err));
   }, []);
+
   return (
-    <>
-      <li className="card-container" key={post.id}></li>
-      <></>
-      <div className="card-left">
+    <div className={S.cardContainer} key={post.id}>
+      <div className={S.cardLeft}>
         <img
           src={
             !!loadUsers[0] &&
             loadUsers
               .map((user) => {
-                console.log(user.id, post.posterId);
                 if (user.id.toString() === post.posterId) {
-                  console.log(user.picture);
                   return user.picture;
                 } else return null;
               })
@@ -55,14 +56,15 @@ const Card = ({ post }) => {
           alt="poster-pic"
         />
       </div>
-      <div className="card-right">
-        <div className="card-header">
+      <div className={S.cardRight}>
+        <div className={S.cardHeader}>
           <div className="pseudo">
             <h3>
               {!!loadUsers[0] &&
                 loadUsers
                   .map((user) => {
-                    if (user.id === post.posterId) return user.pseudo;
+                    if (user.id.toString() === post.posterId)
+                      return user.pseudo;
                     else return null;
                   })
                   .join("")}
@@ -70,32 +72,35 @@ const Card = ({ post }) => {
           </div>
           <span>{dateParser(post.createdAt)}</span>
         </div>
-        {isUpdated === false && <p>{post.message}</p>}
-        {isUpdated && (
-          <div className="update-post">
+        {isUpdating === false && <p>{post.message}</p>}
+        {isUpdating && (
+          <div className={S.postTextArea}>
             <textarea defaultValue={post.message} onChange={handleMessage} />
-            <div className="button-container">
-              <button className="btn" onClick={updatePost}>
-                Valider la modification
-              </button>
-            </div>
           </div>
         )}
 
         {post.picture && (
           <img src={post.picture} alt="card-pic" className="card-pic"></img>
         )}
-        {loadUsers.id === post.posterId && (
-          <div className="button-container">
-            <div onClick={() => setIsUpdated(!isUpdated)}>
-              <i>BTNUPDATEPOST</i>
+
+        <div className={S.cardFooter}>
+          {user.id.toString() === post.posterId && (
+            <div className={S.buttonContainer}>
+              <button
+                className={S.updatePost}
+                onClick={() => {
+                  isUpdating ? updatePost() : setIsUpdating(!isUpdating);
+                }}
+              >
+                Modifier
+              </button>
+              <DeleteCard post={post} getAllPosts={getAllPosts} />
             </div>
-            <DeleteCard id={post.id} />
-          </div>
-        )}
-        <div className="card-footer">{/* <LikeButton post={post} /> */}</div>
+          )}
+          <LikeButton post={post} getAllPosts={getAllPosts} />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

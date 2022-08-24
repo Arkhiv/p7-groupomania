@@ -7,9 +7,8 @@ module.exports = (sequelize, Sequelize) => {
         required: true,
       },
       message: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(250),
         trim: true,
-        maxLength: 250,
       },
       picture: {
         type: Sequelize.STRING,

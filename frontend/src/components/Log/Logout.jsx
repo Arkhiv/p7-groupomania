@@ -9,7 +9,7 @@ const Logout = () => {
   };
   return (
     <li onClick={logout}>
-      <FontAwesomeIcon icon={faSignOut} color="black" />
+      <FontAwesomeIcon icon={faSignOut} />
     </li>
   );
 };

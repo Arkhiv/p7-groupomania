@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import SignInForm from "./SignInForm";
+import S from "./Log.module.css";
 
 const SignUpForm = () => {
   const [formSubmit, setFormSubmit] = useState(false);
@@ -56,7 +57,12 @@ const SignUpForm = () => {
           <h4 className="success">Enregistrement réussi ! Connectez vous !</h4>
         </>
       ) : (
-        <form action="" onSubmit={handleRegister} id="sign-up-form">
+        <form
+          className={S.signUpForm}
+          action=""
+          onSubmit={handleRegister}
+          id="sign-up-form"
+        >
           <label htmlFor="pseudo">Pseudo</label>
           <br />
           <input

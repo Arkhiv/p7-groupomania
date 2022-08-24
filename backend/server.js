@@ -4,7 +4,6 @@ const cors = require('cors');
 const app = express();
 const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes');
-const commentRoutes = require('./routes/comment.routes');
 
 const corsOptions = {
   origin: 'http://localhost:8080',
@@ -22,7 +21,6 @@ app.get('/', (req, res) => {
 // routing
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
-app.use('/api/comment', commentRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

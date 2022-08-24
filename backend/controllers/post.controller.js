@@ -8,6 +8,7 @@ const fs = require('fs');
 const { promisify } = require('util');
 const pipeline = promisify(require('stream').pipeline);
 const { uploadErrors } = require('../utils/errors.utils');
+const { log } = require('console');
 
 exports.readPost = (req, res) => {
   Post.findOne({ where: { id: req.params.id } })
@@ -123,23 +124,32 @@ exports.deletePost = (req, res) => {
     });
 };
 
-// exports.like = (req, res) => {
-//   const userId = req.params.id;
-//   Post.put({ where: { id: userId } })
-//     .then(num => {
-//       if (num === 1) {
-//         res.send({
-//           message: 'Post supprimé!',
-//         });
-//       } else {
-//         res.send({
-//           message: `Cannot delete Post with id=${userId}. Maybe Post was not found!`,
-//         });
-//       }
-//     })
-//     .catch(() => {
-//       res.status(500).send({
-//         message: `Could not delete Post with id=${userId}`,
-//       });
-//     });
-// };
+exports.likePost = (req, res) => {
+  const postId = req.params.id;
+  const { likerId } = req.body;
+
+  Post.findOne({ where: { id: req.params.id } })
+    .then(postResponse => {
+      const likersArray = postResponse.likers || [];
+      console.log(likerId);
+      const index = likersArray.findIndex(id => likerId === id);
+      if (index === -1) {
+        likersArray.push(likerId);
+      }
+
+      Post.update({ likers: likersArray }, { where: { id: postId } }).then(
+        () => {
+          res.status(201).json({
+            message: 'Votre Post a bien été modifié !',
+          });
+        }
+      );
+    })
+
+    .catch(err => {
+      console.log(err);
+      res.status(500).send({
+        message: `Could not update Post with id=${postId}`,
+      });
+    });
+};

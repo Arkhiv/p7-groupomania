@@ -1,23 +1,28 @@
 import React from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import S from "./Post.module.css";
 
-const DeleteCard = ({ post }) => {
+const DeleteCard = ({ post, getAllPosts }) => {
+  console.log("ICI", post);
   const deletePost = () => {
     const url = `${process.env.REACT_APP_API_URL}/api/post/${post.id}`;
 
     axios.delete(url).then((response) => {
-      console.log(response.data);
+      getAllPosts();
     });
   };
   return (
     <div
+      className={S.deletePost}
       onClick={() => {
         if (window.confirm("Voulez-vous supprimer ce Post ?")) {
           deletePost();
         }
       }}
     >
-      <p>ICONEDELETEPOST</p>
+      <FontAwesomeIcon icon={faTrash} />
     </div>
   );
 };
