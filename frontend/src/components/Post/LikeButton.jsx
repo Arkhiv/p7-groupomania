@@ -5,7 +5,7 @@ import axios from "axios";
 import S from "./Post.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faHeartBroken } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const LikeButton = ({ post, getAllPosts }) => {
   const [liked, setLiked] = useState(false);
