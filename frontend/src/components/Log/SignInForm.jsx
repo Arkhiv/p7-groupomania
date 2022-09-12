@@ -61,9 +61,13 @@ const SignInForm = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      {loginError && <div className="">Email ou Mot de passe incorrect!</div>}
+      {loginError && (
+        <div className={S.signInError}>Email ou Mot de passe incorrect!</div>
+      )}
       <br />
-      <input type="submit" value="Se connecter" />
+      <button type="submit" value="Se connecter">
+        Se connecter
+      </button>
     </form>
   );
 };

@@ -19,7 +19,6 @@ const LikeButton = ({ post, getAllPosts }) => {
       getAllPosts();
     });
   };
-  const unlike = () => {};
 
   useEffect(() => {
     const likers = post.likers || [];
@@ -31,10 +30,10 @@ const LikeButton = ({ post, getAllPosts }) => {
   return (
     <div className={S.likeButton}>
       {uid && liked && (
-        <FontAwesomeIcon icon={faHeart} color="green"></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faHeart} color="#FD2D01"></FontAwesomeIcon>
       )}
       {uid && liked === false && (
-        <FontAwesomeIcon icon={faHeartBroken} onClick={like}></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faHeart} onClick={like}></FontAwesomeIcon>
       )}
       <span>{post.likers?.length}</span>
     </div>

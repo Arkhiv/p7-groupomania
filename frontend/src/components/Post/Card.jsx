@@ -55,6 +55,7 @@ const Card = ({ post, getAllPosts }) => {
           }
           alt="poster-pic"
         />
+        <LikeButton post={post} getAllPosts={getAllPosts} />
       </div>
       <div className={S.cardRight}>
         <div className={S.cardHeader}>
@@ -97,7 +98,6 @@ const Card = ({ post, getAllPosts }) => {
               <DeleteCard post={post} getAllPosts={getAllPosts} />
             </div>
           )}
-          <LikeButton post={post} getAllPosts={getAllPosts} />
         </div>
       </div>
     </div>

@@ -258,9 +258,6 @@
     font-size: 1.5rem;
 }
 
-.cardFooter {
-}
-
 .deletePost {
     font-size: 2rem;
     color: #4e5166;
@@ -316,4 +313,20 @@
     font-size: 16px;
     text-align: center;
     resize: none;
+}
+
+.likeButton {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    margin: 5%;
+}
+
+.likeButton span {
+    font-size: 1rem;
+    padding-left: 10%;
+}
+
+.likeButton:hover {
+    cursor: pointer;
 }

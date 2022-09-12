@@ -107,7 +107,9 @@ const SignUpForm = () => {
           />
           <div className="password-confirm error"></div>
           <br />
-          <input type="submit" value="Valider inscription" />
+          <button type="submit" value="Valider inscription">
+            Valider
+          </button>
         </form>
       )}
     </>
