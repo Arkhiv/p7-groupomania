@@ -24,6 +24,16 @@ const SignInForm = () => {
         if (res.data.token && res.data.userId) {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("userId", res.data.userId);
+
+          axios({
+            method: "get",
+            url: `${process.env.REACT_APP_API_URL}/api/user/${res.data.userId}`,
+            withCredentials: true,
+          })
+            .then((res) => {
+              localStorage.setItem("user", JSON.stringify(res.data));
+            })
+            .catch((err) => console.log(err));
           window.location = "/";
         }
       })

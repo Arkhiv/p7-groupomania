@@ -37,7 +37,7 @@ const UpdateProfil = () => {
             <div className={S.pictureContainer}>
               <h3>Photo de profil</h3>
               <div className={S.pictureWrapper}>
-                <img src={user.picture} alt="PROFILPIC" />
+                {user?.picture && <img src={user.picture} alt="PROFILPIC" />}
               </div>
               <UploadImg />
             </div>

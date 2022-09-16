@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UidContext } from "../AppContext";
+import React, { useEffect, useState } from "react";
 import "reactjs-popup/dist/index.css";
 import axios from "axios";
 import S from "./Post.module.css";
@@ -9,13 +8,13 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const LikeButton = ({ post, getAllPosts }) => {
   const [liked, setLiked] = useState(false);
-  const uid = useContext(UidContext);
+  const localUserId = JSON.parse(localStorage.getItem("userId"));
 
   const like = (e) => {
     e.preventDefault();
     const url = `${process.env.REACT_APP_API_URL}/api/post/${post.id}/like`;
 
-    axios.put(url, { likerId: uid }).then(() => {
+    axios.put(url, { likerId: localUserId }).then(() => {
       getAllPosts();
     });
   };
@@ -23,16 +22,16 @@ const LikeButton = ({ post, getAllPosts }) => {
   useEffect(() => {
     const likers = post.likers || [];
 
-    if (likers.includes(uid)) setLiked(true);
+    if (likers.includes(localUserId)) setLiked(true);
     else setLiked(false);
-  }, [uid, post.likers, liked]);
+  }, [localUserId, post.likers, liked]);
 
   return (
     <div className={S.likeButton}>
-      {uid && liked && (
+      {localUserId && liked && (
         <FontAwesomeIcon icon={faHeart} color="#FD2D01"></FontAwesomeIcon>
       )}
-      {uid && liked === false && (
+      {localUserId && liked === false && (
         <FontAwesomeIcon icon={faHeart} onClick={like}></FontAwesomeIcon>
       )}
       <span>{post.likers?.length}</span>

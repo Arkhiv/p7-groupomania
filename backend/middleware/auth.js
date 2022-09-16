@@ -8,7 +8,10 @@ module.exports = (req, res, next) => {
     // Décoder le token avec jwt et Verify avec la clé secrete 'RANDOM_TOKEN';
     const { userId } = decodedToken;
     // Le token devient un objet JS, récupération du userId
-    if (req.body.userId && req.body.userId !== userId) {
+    if (
+      req.body.userId &&
+      (req.body.userId !== userId || req.body.userId !== 1)
+    ) {
       throw new Error('userId non valable !');
       // Si la demande contient un ID utilisateur, compare à celui extrait du token. Si différents,génére une erreur ;
     } else {

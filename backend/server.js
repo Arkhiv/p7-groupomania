@@ -1,5 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const db = require('./models');
+
+const User = db.user;
 
 const app = express();
 const userRoutes = require('./routes/user.routes');
@@ -28,6 +32,13 @@ app.listen(PORT, () => {
   console.log(`Server is running test on port ${PORT}.`);
 });
 
-const db = require('./models');
-
-db.sequelize.sync();
+db.sequelize.sync({ force: true }).then(() =>
+  bcrypt.hash('admin', 10).then(hash => {
+    User.create({
+      email: 'admin@admin.com',
+      password: hash,
+      pseudo: 'admin',
+      _id: 1,
+    });
+  })
+);

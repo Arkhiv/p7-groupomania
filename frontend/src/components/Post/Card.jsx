@@ -39,22 +39,20 @@ const Card = ({ post, getAllPosts }) => {
       .catch((err) => console.log(err));
   }, []);
 
+  const postUserPicture =
+    !!loadUsers[0] &&
+    loadUsers
+      .map((user) => {
+        if (user.id.toString() === post.posterId) {
+          return user.picture;
+        } else return null;
+      })
+      .join("");
+
   return (
     <div className={S.cardContainer} key={post.id}>
       <div className={S.cardLeft}>
-        <img
-          src={
-            !!loadUsers[0] &&
-            loadUsers
-              .map((user) => {
-                if (user.id.toString() === post.posterId) {
-                  return user.picture;
-                } else return null;
-              })
-              .join("")
-          }
-          alt="poster-pic"
-        />
+        {postUserPicture && <img src={postUserPicture} alt="poster-pic" />}
         <LikeButton post={post} getAllPosts={getAllPosts} />
       </div>
       <div className={S.cardRight}>
@@ -85,7 +83,8 @@ const Card = ({ post, getAllPosts }) => {
         )}
 
         <div className={S.cardFooter}>
-          {user.id.toString() === post.posterId && (
+          {(user.id.toString() === post.posterId ||
+            user.id.toString() === "1") && (
             <div className={S.buttonContainer}>
               <button
                 className={S.updatePost}

@@ -59,11 +59,13 @@ const AddPostForm = ({ reloadPosts }) => {
     <>
       <div className={S.postFormContainer}>
         <div className={S.postFormWrapper}>
-          <div className={S.userData}>
-            <NavLink exact to="/profil">
-              <img src={user.picture} alt="user-img"></img>
-            </NavLink>
-          </div>
+          {user?.picture && (
+            <div className={S.userData}>
+              <NavLink exact to="/profil">
+                <img src={user.picture} alt="user-img"></img>
+              </NavLink>
+            </div>
+          )}
           <div className={S.postForm}>
             <textarea
               name="message"
