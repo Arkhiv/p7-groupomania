@@ -22,14 +22,10 @@ exports.signup = (req, res) => {
       userSignUp.save();
       res.status(201).json({ message: 'Utilisateur créé !' });
     })
-    .catch(error => {
-      console.log(error);
-      return res.status(500).json({ error });
-    });
+    .catch(error => res.status(500).json({ error }));
 };
 
 exports.login = (req, res) => {
-  console.log(req.body);
   User.findOne({ where: { email: req.body.email } })
     .then(user => {
       if (!user) {

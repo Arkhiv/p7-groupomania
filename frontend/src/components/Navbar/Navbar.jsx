@@ -13,7 +13,7 @@ const Navbar = () => {
     if (JSON.parse(localStorage.getItem("user")).id !== localUser.id) {
       setUser(JSON.parse(localStorage.getItem("user")));
     }
-  }, [JSON.parse(localStorage.getItem("user")), setUser]);
+  }, [localUser.id, setUser]);
 
   const uid = useContext(UidContext);
   if (!user) return null;

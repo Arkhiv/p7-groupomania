@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Log from "../components/Log";
 import { UidContext } from "../components/AppContext";
 import Thread from "../components/Post/Thread";
-import AddPostForm from "../components/Post/AddPostForm";
+// import AddPostForm from "../components/Post/AddPostForm";
 
 const Home = () => {
   const uid = useContext(UidContext);

@@ -5,7 +5,6 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import S from "./Post.module.css";
 
 const DeleteCard = ({ post, getAllPosts }) => {
-  console.log("ICI", post);
   const deletePost = () => {
     const url = `${process.env.REACT_APP_API_URL}/api/post/${post.id}`;
 
