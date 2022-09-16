@@ -3,8 +3,8 @@ import axios from "axios";
 import S from "./Log.module.css";
 
 const SignInForm = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
 
   const handleLogin = (e) => {

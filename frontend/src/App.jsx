@@ -32,15 +32,17 @@ const App = () => {
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_URL}/api/user/${userId}`,
-      withCredentials: true,
-    })
-      .then((res) => {
-        localStorage.setItem("user", JSON.stringify(res.data));
+    if (userId) {
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/api/user/${userId}`,
+        withCredentials: true,
       })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          localStorage.setItem("user", JSON.stringify(res.data));
+        })
+        .catch((err) => console.log(err));
+    }
   }, [userId]);
 
   return (

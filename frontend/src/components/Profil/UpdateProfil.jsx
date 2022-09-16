@@ -47,7 +47,7 @@ const UpdateProfil = () => {
           </div>
         </>
       ) : (
-        <NavLink exact to="/profil"></NavLink>
+        <NavLink to="/profil"></NavLink>
       )}
     </div>
   );

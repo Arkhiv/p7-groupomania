@@ -18,12 +18,12 @@ const Navbar = () => {
   return (
     <nav className={S.navContainer}>
       <div className={S.navBlock}>
-        <NavLink exact to="/">
+        <NavLink to="/">
           <img className="logo" src={logo} alt="" />
         </NavLink>
         <ul>
           <li className="welcome">
-            <NavLink exact to="/profil">
+            <NavLink to="/profil">
               <h5>Bienvenue {user.pseudo}</h5>
             </NavLink>
           </li>
