@@ -32,7 +32,7 @@ app.listen(PORT, () => {
   console.log(`Server is running test on port ${PORT}.`);
 });
 
-db.sequelize.sync({ force: true }).then(() =>
+db.sequelize.sync().then(() =>
   bcrypt.hash('admin', 10).then(hash => {
     User.create({
       email: 'admin@admin.com',
