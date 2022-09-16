@@ -27,9 +27,14 @@ const Thread = () => {
       <AddPostForm reloadPosts={getAllPosts} />
       <ul>
         {!!loadPosts[0] &&
-          loadPosts.map((post) => {
-            return <Card post={post} key={post.id} getAllPosts={getAllPosts} />;
-          })}
+          loadPosts
+            .slice(0)
+            .reverse()
+            .map((post) => {
+              return (
+                <Card post={post} key={post.id} getAllPosts={getAllPosts} />
+              );
+            })}
       </ul>
     </div>
   );

@@ -131,7 +131,6 @@ exports.likePost = (req, res) => {
   Post.findOne({ where: { id: req.params.id } })
     .then(postResponse => {
       const likersArray = postResponse.likers || [];
-      console.log(likerId);
       const index = likersArray.findIndex(id => likerId === id);
       if (index === -1) {
         likersArray.push(likerId);
@@ -147,7 +146,6 @@ exports.likePost = (req, res) => {
     })
 
     .catch(err => {
-      console.log(err);
       res.status(500).send({
         message: `Could not update Post with id=${postId}`,
       });
