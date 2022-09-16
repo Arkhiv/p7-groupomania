@@ -28,6 +28,7 @@ axios.interceptors.request.use(
 
 const App = () => {
   const jwt = localStorage.getItem("token");
+  // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useState(jwt || null);
   const userId = localStorage.getItem("userId");
 

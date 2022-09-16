@@ -7,7 +7,6 @@ import UpdateBio from "./UpdateBio";
 import S from "./Profil.module.css";
 
 const UpdateProfil = () => {
-  const localUser = localStorage.getItem("user");
   const userId = localStorage.getItem("userId");
   const [user, setUser] = useState(null);
 
