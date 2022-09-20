@@ -82,8 +82,7 @@ const Card = ({ post, getAllPosts }) => {
         )}
 
         <div className={S.cardFooter}>
-          {(user.id.toString() === post.posterId ||
-            user.id.toString() === "1") && (
+          {(user.id.toString() === post.posterId || user.statut === 1) && (
             <div className={S.buttonContainer}>
               <button
                 className={S.updatePost}

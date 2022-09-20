@@ -36,6 +36,8 @@ const SignUpForm = () => {
         },
       })
         .then((res) => {
+          res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+          console.log(res);
           if (res.data.errors) {
             pseudoError.innerHTML = res.data.errors.pseudo;
             emailError.innerHTML = res.data.errors.email;

@@ -38,7 +38,7 @@ db.sequelize.sync().then(() =>
       email: 'admin@admin.com',
       password: hash,
       pseudo: 'admin',
-      _id: 1,
+      statut: 1,
     });
   })
 );

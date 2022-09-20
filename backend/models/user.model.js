@@ -25,6 +25,7 @@ module.exports = (sequelize, Sequelize) => {
     bio: {
       type: Sequelize.STRING(1024),
     },
+    statut: Sequelize.INTEGER,
   });
   return User;
 };
