@@ -29,12 +29,10 @@ const UpdateProfil = () => {
     <div className={S.profilUpdateContainer}>
       {uid ? (
         <>
-          <h1>
-            Profil de<p>{"" + user.pseudo}</p>
-          </h1>
+          <h1>Profil de {user.pseudo}</h1>
           <div className={S.updateContainer}>
             <div className={S.pictureContainer}>
-              <h3>Photo de profil</h3>
+              <h2>Photo de profil</h2>
               <div className={S.pictureWrapper}>
                 {user?.picture && <img src={user.picture} alt="PROFILPIC" />}
               </div>
