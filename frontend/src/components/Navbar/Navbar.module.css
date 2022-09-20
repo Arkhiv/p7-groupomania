@@ -1,13 +1,12 @@
 .navContainer {
     border-bottom: solid 3px #ffd7d7;
-    height: 10vh;
 }
 
 .navBlock {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: inherit;
+    height: 12vh;
 }
 
 .navContainer img {
@@ -19,8 +18,11 @@
     justify-content: space-between;
     align-items: center;
     padding-right: 5%;
-    width: 20%;
     list-style: none;
+}
+
+li {
+    padding-right: 1%;
 }
 
 li a {
@@ -30,7 +32,7 @@ li a {
 }
 
 li a:hover {
-    color: #fd2d01;
+    color: #811d09;
 }
 
 li svg {
@@ -41,7 +43,7 @@ li svg {
 }
 
 li svg:hover {
-    color: #fd2d01;
+    color: #811d09;
 }
 
 .navBlock h2 {

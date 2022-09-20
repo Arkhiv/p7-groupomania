@@ -27,7 +27,7 @@
 
 .postForm {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     align-content: center;
@@ -76,7 +76,7 @@
     white-space: normal;
     font-weight: 700;
     text-align: center;
-    padding: 16px 14px 18px;
+    padding: 10px 7px 10px;
     color: #4e5166;
     box-shadow: inset 0 0 0 2px #4e5166;
     background-color: transparent;
@@ -89,11 +89,11 @@
 }
 
 .footerForm label.selected {
-    color: #fd2d01;
+    color: #811d09;
 }
 
 .footerForm label.selected:hover {
-    color: #fd2d01;
+    color: #811d09;
 }
 
 .sendPostForm {
@@ -112,7 +112,7 @@
     white-space: normal;
     font-weight: 700;
     text-align: center;
-    padding: 16px 14px 18px;
+    padding: 10px 7px 10px;
     color: #4e5166;
     box-shadow: inset 0 0 0 2px #5f5f66;
     background-color: transparent;
@@ -265,7 +265,7 @@
 }
 
 .deletePost:hover {
-    color: #fd2d01;
+    color: #811d09;
 }
 
 .updatePost {
@@ -284,7 +284,7 @@
     white-space: normal;
     font-weight: 700;
     text-align: center;
-    padding: 16px 14px 18px;
+    padding: 10px 7px 10px;
     color: #4e5166;
     box-shadow: inset 0 0 0 2px #5f5f66;
     background-color: transparent;

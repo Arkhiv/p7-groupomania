@@ -23,6 +23,7 @@ const Navbar = () => {
             <img className="logo" src={logo} alt="groupomania-logo" />
           </h1>
         </NavLink>
+
         <ul>
           <li className="welcome">
             <NavLink to="/profil">
