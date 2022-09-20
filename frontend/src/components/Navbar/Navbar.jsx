@@ -19,12 +19,14 @@ const Navbar = () => {
     <nav className={S.navContainer}>
       <div className={S.navBlock}>
         <NavLink to="/">
-          <img className="logo" src={logo} alt="" />
+          <h1>
+            <img className="logo" src={logo} alt="groupomania-logo" />
+          </h1>
         </NavLink>
         <ul>
           <li className="welcome">
             <NavLink to="/profil">
-              <h5>Bienvenue {user.pseudo}</h5>
+              <h2>Bienvenue {user.pseudo}</h2>
             </NavLink>
           </li>
           <Logout />

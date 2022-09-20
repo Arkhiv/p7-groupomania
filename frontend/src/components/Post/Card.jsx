@@ -51,7 +51,7 @@ const Card = ({ post, getAllPosts }) => {
   return (
     <div className={S.cardContainer} key={post.id}>
       <div className={S.cardLeft}>
-        {postUserPicture && <img src={postUserPicture} alt="poster-pic" />}
+        {postUserPicture && <img src={postUserPicture} alt="" />}
         <LikeButton post={post} getAllPosts={getAllPosts} />
       </div>
       <div className={S.cardRight}>

@@ -57,13 +57,12 @@ const AddPostForm = ({ reloadPosts }) => {
         <div className={S.postFormWrapper}>
           {user?.picture && (
             <div className={S.userData}>
-              <NavLink exact to="/profil">
-                <img src={user.picture} alt="user-img"></img>
-              </NavLink>
+              <img src={user.picture} alt="user-img" />
             </div>
           )}
-          <div className={S.postForm}>
+          <div className={S.postForm} label="postform">
             <textarea
+              aria-labelledby="message"
               name="message"
               id="message"
               placeholder="Partagez avec Groupomania !"
