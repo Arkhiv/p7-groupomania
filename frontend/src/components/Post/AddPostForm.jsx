@@ -16,7 +16,6 @@ const AddPostForm = ({ reloadPosts }) => {
   const [labelText, setLabelText] = useState("Choisir une image");
 
   const handleNewPost = async () => {
-    console.log(postMessage, postPicture);
     if (postMessage || postPicture) {
       const url = `${process.env.REACT_APP_API_URL}/api/post/`;
       const postFormData = new FormData();
@@ -26,7 +25,6 @@ const AddPostForm = ({ reloadPosts }) => {
       if (file) postFormData.append("picture", file);
 
       await axios.post(url, postFormData).then((response) => {
-        console.log(response.data);
         cancelPost();
         reloadPosts();
       });
@@ -36,14 +34,12 @@ const AddPostForm = ({ reloadPosts }) => {
   };
 
   function handlePostPicture(e) {
-    console.log(e.target.files[0]);
     setPostPicture(URL.createObjectURL(e.target.files[0]));
     setFile(e.target.files[0]);
     setLabelText(e.target.files[0].name);
   }
 
   function handlePostMessage(e) {
-    console.log(e);
     setPostMessage(e.target.value);
   }
 

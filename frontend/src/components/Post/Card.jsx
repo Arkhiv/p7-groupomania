@@ -21,7 +21,6 @@ const Card = ({ post, getAllPosts }) => {
     formData.append("message", message);
 
     axios.put(url, { message }).then((response) => {
-      console.log(response.data);
       setIsUpdating(false);
       getAllPosts();
     });

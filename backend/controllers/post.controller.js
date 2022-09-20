@@ -50,8 +50,6 @@ module.exports.createPost = async (req, res) => {
 
       fileName = `${req.body.posterId}_${Date.now().toString()}.jpg`;
 
-      console.log('SALUTUUT', fileName);
-
       await pipeline(
         req.file.stream,
         fs.createWriteStream(
@@ -59,7 +57,6 @@ module.exports.createPost = async (req, res) => {
         )
       );
     } catch (err) {
-      console.log('error', err);
       const errors = uploadErrors(err);
       return res.status(201).json({ errors });
     }

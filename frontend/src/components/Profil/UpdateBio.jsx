@@ -19,7 +19,6 @@ const UpdateBio = () => {
     formData.append("bio", bio);
 
     axios.put(url, { bio }).then((response) => {
-      console.log(response.data);
       axios.get(url).then((res) => {
         localStorage.setItem("user", JSON.stringify(res.data));
         setUpdateForm(false);
