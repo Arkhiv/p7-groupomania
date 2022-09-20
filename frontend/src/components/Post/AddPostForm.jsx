@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { dateParser } from "../Utils";
 import axios from "axios";
 import S from "./Post.module.css";
