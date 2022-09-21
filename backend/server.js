@@ -14,7 +14,7 @@ const corsOptions = {
   credentials: true,
   allowHeaders: ['sessionId', 'Content-Type'],
   exposedHeaders: ['sessionId'],
-  methods: 'GET,HED,PUT,PATCH,POST,DELETE',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
 };
 app.use(cors(corsOptions));
@@ -23,6 +23,15 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 // simple route
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'http:localhost:3000');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept'
+//   );
+//   next();
+// });
+
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Groupomania' });
 });
@@ -37,20 +46,8 @@ app.listen(PORT, () => {
   console.log(`Server is running test on port ${PORT}.`);
 });
 
-// db.sequelize.sync().then(() =>
-//   bcrypt.hash('admin', 10).then(hash => {
-//     User.create({
-//       email: 'admin@admin.com',
-//       password: hash,
-//       pseudo: 'admin',
-//       statut: 1,
-//     });
-//   })
-// );
-
-function isAdminExist() {
-  User.findOne({ where: { pseudo: 'admin' } });
-  if (!isAdminExist) {
+User.findOne({ where: { statut: 1 } }).then(user => {
+  if (user === null) {
     bcrypt.hash('admin', 10).then(hash => {
       User.create({
         email: 'admin@admin.com',
@@ -59,10 +56,6 @@ function isAdminExist() {
         statut: 1,
       });
     });
-    db.sequelize.sync();
-  } else {
-    db.sequelize.sync();
   }
-}
-
-isAdminExist();
+  db.sequelize.sync();
+});
