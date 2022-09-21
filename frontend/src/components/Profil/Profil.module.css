@@ -1,3 +1,9 @@
+.logContainer {
+    background-color: #ffd7d7;
+    border-radius: 16px;
+    margin: 1%;
+}
+
 .profilPage {
     color: #4e5166;
 }
