@@ -11,6 +11,11 @@ const postRoutes = require('./routes/post.routes');
 
 const corsOptions = {
   origin: 'http://localhost:8080',
+  credentials: true,
+  allowHeaders: ['sessionId', 'Content-Type'],
+  exposedHeaders: ['sessionId'],
+  methods: 'GET,HED,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
