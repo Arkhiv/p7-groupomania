@@ -10,7 +10,7 @@ const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes');
 
 const corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: 'http://localhost:3000',
   credentials: true,
   allowHeaders: ['sessionId', 'Content-Type'],
   exposedHeaders: ['sessionId'],
@@ -37,13 +37,32 @@ app.listen(PORT, () => {
   console.log(`Server is running test on port ${PORT}.`);
 });
 
-db.sequelize.sync().then(() =>
-  bcrypt.hash('admin', 10).then(hash => {
-    User.create({
-      email: 'admin@admin.com',
-      password: hash,
-      pseudo: 'admin',
-      statut: 1,
+// db.sequelize.sync().then(() =>
+//   bcrypt.hash('admin', 10).then(hash => {
+//     User.create({
+//       email: 'admin@admin.com',
+//       password: hash,
+//       pseudo: 'admin',
+//       statut: 1,
+//     });
+//   })
+// );
+
+function isAdminExist() {
+  User.findOne({ where: { pseudo: 'admin' } });
+  if (!isAdminExist) {
+    bcrypt.hash('admin', 10).then(hash => {
+      User.create({
+        email: 'admin@admin.com',
+        password: hash,
+        pseudo: 'admin',
+        statut: 1,
+      });
     });
-  })
-);
+    db.sequelize.sync();
+  } else {
+    db.sequelize.sync();
+  }
+}
+
+isAdminExist();
